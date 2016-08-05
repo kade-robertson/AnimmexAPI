@@ -1,0 +1,5 @@
+C:\Users\Kade\Documents\GitHub\AnimmexAPI\bin\Debug\AnimmexAPI.dll
+C:\Users\Kade\Documents\GitHub\AnimmexAPI\bin\Debug\AnimmexAPI.pdb
+C:\Users\Kade\Documents\GitHub\AnimmexAPI\obj\Debug\AnimmexAPI.csprojResolveAssemblyReference.cache
+C:\Users\Kade\Documents\GitHub\AnimmexAPI\obj\Debug\AnimmexAPI.dll
+C:\Users\Kade\Documents\GitHub\AnimmexAPI\obj\Debug\AnimmexAPI.pdb
