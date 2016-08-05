@@ -1,5 +1,11 @@
 ﻿namespace AnimmexAPI
 {
+    /// <summary>
+    /// - m_uastring: string ----------------- Contains the user-agent string
+    /// + Useragent(): ctor ------------------ Default constructor, makes a Chrome UserAgent object
+    /// + UserAgent(uastring: string): ctor -- Allows for creation of a custom UserAgent object if the provided ones are not desired
+    /// + ToString(): string ----------------- Returns the user-agent string for usage
+    /// </summary>
     public class UserAgent
     {
         private readonly string m_uastring;
