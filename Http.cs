@@ -93,6 +93,13 @@ namespace AnimmexAPI
             }
         }
 
+        /// <summary>
+        /// Get data from a large block between two strings.
+        /// </summary>
+        /// <param name="data">Data to parse.</param>
+        /// <param name="before">String that comes before the desired data.</param>
+        /// <param name="after">String that comes after the desired data.</param>
+        /// <returns>Data between the before and after strings.</returns>
         public static string GetBetween(string data, string before, string after)
         {
             return data.Split(new string[] { before }, StringSplitOptions.None)[1].Split(new string[] { after }, StringSplitOptions.None)[0];
