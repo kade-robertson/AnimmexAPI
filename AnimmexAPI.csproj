@@ -37,6 +37,8 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnimmexAPI.cs" />
+    <Compile Include="AnimmexVideo.cs" />
     <Compile Include="Http.cs" />
     <Compile Include="HttpResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

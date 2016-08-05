@@ -5,7 +5,7 @@
         /// <summary>
         /// Private field for the user-agent string.
         /// </summary>
-        private readonly string m_uastring;
+        private readonly string m_uastring = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
 
         /// <summary>
         /// Default Opera user-agent.

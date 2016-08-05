@@ -18,8 +18,9 @@ namespace AnimmexAPI
         /// <returns>An HttpResult object containing the data and last visited URL, wrapped in a Task.</returns>
         public static async Task<HttpResult> DoGetAsync(string url, string referer, UserAgent ua = default(UserAgent), CookieContainer cookies = default(CookieContainer), bool readdata = true)
         {
-            using (var handler = new HttpClientHandler() { UseProxy = false, Proxy = null, CookieContainer = cookies })
+            using (var handler = new HttpClientHandler() { /*UseProxy = false, Proxy = null,*/ UseCookies = true })
             {
+                handler.CookieContainer = cookies == default(CookieContainer) ? new CookieContainer() : cookies;
                 using (var client = new HttpClient(handler))
                 {
                     try
@@ -27,7 +28,7 @@ namespace AnimmexAPI
                         client.DefaultRequestHeaders.UserAgent.ParseAdd(ua.ToString());
 
                         HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, url);
-                        requestMessage.Headers.Referrer = new Uri(referer);
+                        if (referer != string.Empty) requestMessage.Headers.Referrer = new Uri(referer);
 
                         HttpResponseMessage responseMessage;
                         if (readdata) {
@@ -55,13 +56,14 @@ namespace AnimmexAPI
         /// <param name="referer">The referring URL for the request.</param>
         /// <param name="ua">The user-agent to use as a UserAgent object.</param>
         /// <param name="cookies">The CookieContainer to use if required.</param>
-        /// <param name="readdata">If only headers or the final URL are required, do not download all data.</param>
         /// <param name="postdata">The FormUrlEncodedContent that should be POSTed to the URL.</param>
+        /// <param name="readdata">If only headers or the final URL are required, do not download all data.</param>
         /// <returns>An HttpResult object containing the data and last visited URL, wrapped in a Task.</returns>
         public static async Task<HttpResult> DoPostAsync(string url, string referer, UserAgent ua = default(UserAgent), CookieContainer cookies = default(CookieContainer), FormUrlEncodedContent postdata = default(FormUrlEncodedContent), bool readdata = true)
         {
-            using (var handler = new HttpClientHandler() { UseProxy = false, Proxy = null, CookieContainer = cookies })
+            using (var handler = new HttpClientHandler() { /*UseProxy = false, Proxy = null,*/ UseCookies = true })
             {
+                handler.CookieContainer = cookies == default(CookieContainer) ? new CookieContainer() : cookies;
                 using (var client = new HttpClient(handler))
                 {
                     try
@@ -69,14 +71,14 @@ namespace AnimmexAPI
                         client.DefaultRequestHeaders.UserAgent.ParseAdd(ua.ToString());
 
                         HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, url);
-                        requestMessage.Headers.Referrer = new Uri(referer);
+                        if (referer != string.Empty) requestMessage.Headers.Referrer = new Uri(referer);
                         requestMessage.Content = postdata;
 
                         HttpResponseMessage responseMessage;
                         if (readdata) {
                             responseMessage = await client.GetAsync(url);
                             responseMessage.EnsureSuccessStatusCode();
-                            return new HttpResult(await responseMessage.Content.ReadAsStringAsync(), responseMessage.RequestMessage.RequestUri.ToString());
+                            return new HttpResult(await responseMessage.Content.ReadAsStringAsync(), responseMessage.RequestMessage.RequestUri.ToString() + Environment.NewLine + responseMessage.RequestMessage.Headers.ToString());
                         } else {
                             responseMessage = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
                             responseMessage.EnsureSuccessStatusCode();
@@ -89,6 +91,11 @@ namespace AnimmexAPI
                     }
                 }
             }
+        }
+
+        public static string GetBetween(string data, string before, string after)
+        {
+            return data.Split(new string[] { before }, StringSplitOptions.None)[1].Split(new string[] { after }, StringSplitOptions.None)[0];
         }
     }
 
