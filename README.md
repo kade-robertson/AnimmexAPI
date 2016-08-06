@@ -1,5 +1,6 @@
 AnimmexAPI
 ==========
+[![GitHub stars](https://img.shields.io/github/stars/kade-robertson/AnimmexAPI.svg)](https://github.com/kade-robertson/AnimmexAPI/stargazers) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kade-robertson/AnimmexAPI/master/LICENSE.md)
 
 Animmex is a not-so-popular website hosted in Russia that provides a platforrm
 to update and watch videos of all kinds. However, it is ad-riddled and you are
