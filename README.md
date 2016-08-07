@@ -11,13 +11,19 @@ The API has been built in VS as a portable class library that is compatible with
 applications on iOS, Android and Windows, and with Xamarin. The actual supported
 environments are as follows:
 
-* .NET Framework 4.5
-* ASP.NET Core 5.0
-* Windows 8
-* Windows Phone 8.1
-* Xamarin.Android
-* Xamarin.iOS
-* Xamarin.iOS (Classic)
+-   .NET Framework 4.5
+
+-   ASP.NET Core 5.0
+
+-   Windows 8
+
+-   Windows Phone 8.1
+
+-   Xamarin.Android
+
+-   Xamarin.iOS
+
+-   Xamarin.iOS (Classic)
 
 Documentation
 =============
@@ -32,11 +38,16 @@ As of the most recent build, there is a whole 1 function available for usage!
 Here’s an example. You might want to look at the structure of AnimmexVideo
 object to see what you can do.
 
-    var api = new AnimmexAPI.AnimmexAPI();
-    var videos = api.GetRecentlyViewed();
-    foreach (AnimmexAPI.AnimmexVideo video in videos) {
-        MessageBox.Show(video.Title);
-    }
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+var api = new AnimmexClient();
+var videos = api.GetRecentlyViewed();
+foreach (AnimmexVideo video in videos) {
+    MessageBox.Show($"Title: {video.Title}" + Environment.NewLine +
+                     "Views: {video.Views}" + Environment.NewLine +
+                     "Length: {video.Duration}" + Environment.NewLine +
+                     "Rating: {video.Rating}%");
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Notes
 =====
