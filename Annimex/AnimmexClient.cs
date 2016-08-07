@@ -60,13 +60,73 @@ namespace AnimmexAPI
         }
 
         /// <summary>
-        /// Gets a list of the most recently viewed videos.
+        /// Gets a list of the most recently viewed videos, optionally with a search term.
         /// </summary>
         /// <param name="keepinvalid">Chooses whether to keep videos that weren't able to be parsed correctly.</param>
         /// <returns>A list of AnimmexVideo objects that have been viewed recently.</returns>
-        public async Task<List<AnimmexVideo>> GetRecentlyViewed(bool keepinvalid = false)
+        public async Task<List<AnimmexVideo>> GetRecentlyViewed(string searchterm = "", bool keepinvalid = false)
         {
-            return await Search(string.Empty);
+            return await Search(searchterm, sorting: SortBy.BeingWatched, keepinvalid: keepinvalid);
+        }
+
+        /// <summary>
+        /// Gets a list of the most recently uploaded videos, optionally with a search term.
+        /// </summary>
+        /// <param name="keepinvalid">Chooses whether to keep videos that weren't able to be parsed correctly.</param>
+        /// <returns>A list of AnimmexVideo objects that have been uploaded recently.</returns>
+        public async Task<List<AnimmexVideo>> GetMostRecent(string searchterm = "", bool keepinvalid = false)
+        {
+            return await Search(searchterm, sorting: SortBy.MostRecent, keepinvalid: keepinvalid);
+        }
+
+        /// <summary>
+        /// Gets a list of the most viewed videos, optionally with a search term.
+        /// </summary>
+        /// <param name="keepinvalid">Chooses whether to keep videos that weren't able to be parsed correctly.</param>
+        /// <returns>A list of AnimmexVideo objects that have been viewed the most.</returns>
+        public async Task<List<AnimmexVideo>> GetMostViewed(string searchterm = "", bool keepinvalid = false)
+        {
+            return await Search(searchterm, sorting: SortBy.MostViewed, keepinvalid: keepinvalid);
+        }
+
+        /// <summary>
+        /// Gets a list of the most discussed videos, optionally with a search term.
+        /// </summary>
+        /// <param name="keepinvalid">Chooses whether to keep videos that weren't able to be parsed correctly.</param>
+        /// <returns>A list of AnimmexVideo objects that have been most discussed.</returns>
+        public async Task<List<AnimmexVideo>> GetMostCommented(string searchterm = "", bool keepinvalid = false)
+        {
+            return await Search(searchterm, sorting: SortBy.MostCommented, keepinvalid: keepinvalid);
+        }
+
+        /// <summary>
+        /// Gets a list of the most recently viewed videos, optionally with a search term.
+        /// </summary>
+        /// <param name="keepinvalid">Chooses whether to keep videos that weren't able to be parsed correctly.</param>
+        /// <returns>A list of AnimmexVideo objects that have been viewed recently.</returns>
+        public async Task<List<AnimmexVideo>> GetTopRated(string searchterm = "", bool keepinvalid = false)
+        {
+            return await Search(searchterm, sorting: SortBy.TopRated, keepinvalid: keepinvalid);
+        }
+
+        /// <summary>
+        /// Gets a list of the most favourited videos, optionally with a search term.
+        /// </summary>
+        /// <param name="keepinvalid">Chooses whether to keep videos that weren't able to be parsed correctly.</param>
+        /// <returns>A list of AnimmexVideo objects that have been most favourited.</returns>
+        public async Task<List<AnimmexVideo>> GetMostFavourited(string searchterm = "", bool keepinvalid = false)
+        {
+            return await Search(searchterm, sorting: SortBy.TopFavourites, keepinvalid: keepinvalid);
+        }
+
+        /// <summary>
+        /// Gets a list of the longest videos, optionally with a search term.
+        /// </summary>
+        /// <param name="keepinvalid">Chooses whether to keep videos that weren't able to be parsed correctly.</param>
+        /// <returns>A list of AnimmexVideo objects that have the longest duration.</returns>
+        public async Task<List<AnimmexVideo>> GetLongest(string searchterm = "", bool keepinvalid = false)
+        {
+            return await Search(searchterm, sorting: SortBy.Longest, keepinvalid: keepinvalid);
         }
     }
 }
