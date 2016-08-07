@@ -22,6 +22,8 @@
       <h1>
 <a id="animmexapi" class="anchor" href="#animmexapi" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>AnimmexAPI</h1>
 
+<p><a href="https://github.com/kade-robertson/AnimmexAPI/stargazers"><img src="https://img.shields.io/github/stars/kade-robertson/AnimmexAPI.svg" alt="GitHub stars"></a> <a href="https://raw.githubusercontent.com/kade-robertson/AnimmexAPI/master/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license"></a></p>
+
 <p>Animmex is a not-so-popular website hosted in Russia that provides a platforrm
 to update and watch videos of all kinds. However, it is ad-riddled and you are
 forced to use it through the browser. I am making this API simply as an
@@ -32,13 +34,13 @@ applications on iOS, Android and Windows, and with Xamarin. The actual supported
 environments are as follows:</p>
 
 <ul>
-<li>.NET Framework 4.5</li>
-<li>ASP.NET Core 5.0</li>
-<li>Windows 8</li>
-<li>Windows Phone 8.1</li>
-<li>Xamarin.Android</li>
-<li>Xamarin.iOS</li>
-<li>Xamarin.iOS (Classic)</li>
+<li><p>.NET Framework 4.5</p></li>
+<li><p>ASP.NET Core 5.0</p></li>
+<li><p>Windows 8</p></li>
+<li><p>Windows Phone 8.1</p></li>
+<li><p>Xamarin.Android</p></li>
+<li><p>Xamarin.iOS</p></li>
+<li><p>Xamarin.iOS (Classic)</p></li>
 </ul>
 
 <h1>
@@ -50,15 +52,20 @@ although a wiki with more information will be available in the future.</p>
 <h1>
 <a id="example-usage" class="anchor" href="#example-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example Usage</h1>
 
-<p>As of the most recent build, there is a whole 1 function available for usage!
+<p>As of the most recent build, there is a whole 2 functions available for usage!
 Here’s an example. You might want to look at the structure of AnimmexVideo
 object to see what you can do.</p>
 
 <pre><code>var api = new AnimmexClient();
-var videos = api.GetRecentlyViewed();
-foreach (AnimmexVideo video in videos) {
-    MessageBox.Show(video.Title);
+var videos1 = await api.GetRecentlyViewed();
+foreach (AnimmexVideo video in videos1) {
+    MessageBox.Show($"Title: {video.Title}" + Environment.NewLine +
+                    $"Views: {video.Views}" + Environment.NewLine +
+                    $"Length: {video.Duration}" + Environment.NewLine +
+                    $"Rating: {video.Rating}%");
 }
+var videos2 = await api.Search("Simpsons", VideoCategory.All, SortBy.Duration, UploadPeriod.ThisMonth);
+MessageBox.Show($"Results for \"Simpsons\": {videos2.Count}")
 </code></pre>
 
 <h1>
