@@ -99,7 +99,7 @@
 
         private VideoCategory(string catstring = "")
         {
-            m_catstring = catstring == string.Empty ? m_catstring = All.m_catstring : catstring;
+            m_catstring = catstring == string.Empty ? All.ToString() : catstring;
         }
 
         /// <summary>

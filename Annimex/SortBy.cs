@@ -1,6 +1,6 @@
 ﻿namespace AnimmexAPI
 {
-    class SortBy
+    public class SortBy
     {
         /// <summary>
         /// Holds the string that corresponds to the sorting value.
@@ -44,7 +44,7 @@
 
         private SortBy(string sortby = "")
         {
-            m_sortby = sortby == "" ? "" : sortby;
+            m_sortby = sortby == "" ? BeingWatched.ToString() : sortby;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@
         /// <returns>The sorting string to be used by the client.</returns>
         public override string ToString()
         {
-            return base.ToString();
+            return m_sortby;
         }
     }
 }

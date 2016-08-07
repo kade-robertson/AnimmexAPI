@@ -72,7 +72,7 @@ namespace AnimmexAPI
         /// <summary>
         /// Gets the view count of an AnimmexVideo.
         /// </summary>
-        public int Viewcount { get { return m_views; } }
+        public int ViewCount { get { return m_views; } }
 
         /// <summary>
         /// Gets the rating of an AnimmexVideo.

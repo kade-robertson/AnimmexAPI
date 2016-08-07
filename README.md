@@ -34,19 +34,21 @@ although a wiki with more information will be available in the future.
 Example Usage
 =============
 
-As of the most recent build, there is a whole 1 function available for usage!
+As of the most recent build, there is a whole 2 functions available for usage!
 Here’s an example. You might want to look at the structure of AnimmexVideo
 object to see what you can do.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 var api = new AnimmexClient();
-var videos = api.GetRecentlyViewed();
-foreach (AnimmexVideo video in videos) {
+var videos1 = await api.GetRecentlyViewed();
+foreach (AnimmexVideo video in videos1) {
     MessageBox.Show($"Title: {video.Title}" + Environment.NewLine +
-                     "Views: {video.Views}" + Environment.NewLine +
-                     "Length: {video.Duration}" + Environment.NewLine +
-                     "Rating: {video.Rating}%");
+                    $"Views: {video.Views}" + Environment.NewLine +
+                    $"Length: {video.Duration}" + Environment.NewLine +
+                    $"Rating: {video.Rating}%");
 }
+var videos2 = await api.Search("Simpsons", VideoCategory.All, SortBy.Duration, UploadPeriod.ThisMonth);
+MessageBox.Show($"Results for \"Simpsons\": {videos2.Count}")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Notes
