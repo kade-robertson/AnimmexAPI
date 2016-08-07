@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AnimmexAPI
 {
-    public class AnimmexAPI
+    public class AnimmexClient
     {
         /// <summary>
         /// Holds the cookies collected from making requests.
@@ -24,7 +24,7 @@ namespace AnimmexAPI
         /// Creates a new instance of the API.
         /// </summary>
         /// <param name="useragent">Optional, specify a UserAgent for the requests to use.</param>
-        public AnimmexAPI(UserAgent useragent = default(UserAgent))
+        public AnimmexClient(UserAgent useragent = default(UserAgent))
         {
             m_useragent = useragent == null ? UserAgent.Chrome : useragent;
             m_cookies = new CookieContainer();

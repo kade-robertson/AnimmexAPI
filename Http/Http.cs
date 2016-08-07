@@ -31,11 +31,13 @@ namespace AnimmexAPI
                         if (referer != string.Empty) requestMessage.Headers.Referrer = new Uri(referer);
 
                         HttpResponseMessage responseMessage;
-                        if (readdata) {
+                        if (readdata)
+                        {
                             responseMessage = await client.GetAsync(url);
                             responseMessage.EnsureSuccessStatusCode();
                             return new HttpResult(await responseMessage.Content.ReadAsStringAsync(), responseMessage.RequestMessage.RequestUri.ToString());
-                        } else {
+                        }
+                        else {
                             responseMessage = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
                             responseMessage.EnsureSuccessStatusCode();
                             return new HttpResult(string.Empty, responseMessage.RequestMessage.RequestUri.ToString());
@@ -75,11 +77,13 @@ namespace AnimmexAPI
                         requestMessage.Content = postdata;
 
                         HttpResponseMessage responseMessage;
-                        if (readdata) {
+                        if (readdata)
+                        {
                             responseMessage = await client.GetAsync(url);
                             responseMessage.EnsureSuccessStatusCode();
                             return new HttpResult(await responseMessage.Content.ReadAsStringAsync(), responseMessage.RequestMessage.RequestUri.ToString() + Environment.NewLine + responseMessage.RequestMessage.Headers.ToString());
-                        } else {
+                        }
+                        else {
                             responseMessage = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
                             responseMessage.EnsureSuccessStatusCode();
                             return new HttpResult(string.Empty, responseMessage.RequestMessage.RequestUri.ToString());
@@ -105,6 +109,4 @@ namespace AnimmexAPI
             return data.Split(new string[] { before }, StringSplitOptions.None)[1].Split(new string[] { after }, StringSplitOptions.None)[0];
         }
     }
-
-    
 }
