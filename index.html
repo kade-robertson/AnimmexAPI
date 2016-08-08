@@ -52,20 +52,24 @@ although a wiki with more information will be available in the future.</p>
 <h1>
 <a id="example-usage" class="anchor" href="#example-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example Usage</h1>
 
-<p>As of the most recent build, there is a whole 2 functions available for usage!
-Here’s an example. You might want to look at the structure of AnimmexVideo
-object to see what you can do.</p>
+<p>There are quite a few functions that have been built in now, mostly catering to
+the video functionality of the website. The best way right now to use them is to
+browse the source until I have documentation set up.</p>
 
 <pre><code>var api = new AnimmexClient();
 var videos1 = await api.GetRecentlyViewed();
+
 foreach (AnimmexVideo video in videos1) {
     MessageBox.Show($"Title: {video.Title}" + Environment.NewLine +
                     $"Views: {video.Views}" + Environment.NewLine +
                     $"Length: {video.Duration}" + Environment.NewLine +
                     $"Rating: {video.Rating}%");
 }
-var videos2 = await api.Search("Simpsons", VideoCategory.All, SortBy.Duration, UploadPeriod.ThisMonth);
-MessageBox.Show($"Results for \"Simpsons\": {videos2.Count}")
+
+var video_to_watch = await api.ImFeelingLucky("fellowship of the ring");
+var direct_links = await api.GetDirectVideoLinks(video_to_watch);
+
+MessageBox.Show(direct_links.BestQualityStream);
 </code></pre>
 
 <h1>
