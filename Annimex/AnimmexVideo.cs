@@ -105,5 +105,10 @@ namespace AnimmexAPI
             m_rating = rating;
             m_isvalid = isvalid;
         }
+
+        public override string ToString()
+        {
+            return m_title;
+        }
     }
 }

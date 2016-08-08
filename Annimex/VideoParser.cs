@@ -17,9 +17,9 @@ namespace AnimmexAPI
                 var thumburl = Http.GetBetween(videotext, "<img src=\"", "\" ").Trim();
                 var duration_tmp = Http.GetBetween(videotext, "<div class=\"duration\">", "</div>").Trim();
                 var duration_temp = duration_tmp.Contains(":") ? duration_tmp.Split(':') : new string[] { "0", "0", "0" };
-                var duration = new int[3] { duration_temp.Length == 3 ? int.Parse(duration_temp[2]) : 0,
+                var duration = new int[3] { duration_temp.Length == 3 ? int.Parse(duration_temp[0]) : 0,
                                             duration_temp.Length >= 2 ? int.Parse(duration_temp[1]) : 0,
-                                            int.Parse(duration_temp[0]) };
+                                            int.Parse(duration_temp[duration_temp.Length - 1])};
                 var update = 0;
                 if (videotext.Contains("days ago"))
                 {
