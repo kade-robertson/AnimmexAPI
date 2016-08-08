@@ -148,7 +148,7 @@ namespace AnimmexAPI
         /// </summary>
         /// <param name="videoid">The video ID for which direct links should be grabbed.</param>
         /// <returns>A DirectLinks object with the available streams.</returns>
-        public async Task<DirectLinks> GetDirectVideoLinkFromID(int videoid)
+        public async Task<DirectLinks> GetDirectVideoLinksFromID(int videoid)
         {
             var video_page = await Http.DoGetAsync($"https://amx.4553t5pugtt1qslvsnmpc0tpfz5fo.xyz/KL8jJhGjUN0g3HuGhUHSa5XRZ9MVrjXUuvkbCmFyo1GBMFPhvcFyc7gGKdoBxSV/N3WPL4Y3RIcyKUcBunsEyFZal6Imwlrkgcf6E2ZSZG0M8AvvtcB1a.php?id={videoid}",
                                                     "https://www.animmex.net/search/",
@@ -163,9 +163,9 @@ namespace AnimmexAPI
         /// </summary>
         /// <param name="video">The video for which direct links should be grabbed.</param>
         /// <returns>A DirectLinks object with the available streams.</returns>
-        public async Task<DirectLinks> GetDirectVideoLink(AnimmexVideo video)
+        public async Task<DirectLinks> GetDirectVideoLinks(AnimmexVideo video)
         {
-            return await GetDirectVideoLinkFromID(video.ID);
+            return await GetDirectVideoLinksFromID(video.ID);
         }
     }
 }
