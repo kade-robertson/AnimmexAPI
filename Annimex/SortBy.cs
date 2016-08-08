@@ -8,12 +8,12 @@
         private string m_sortby;
 
         /// <summary>
-        /// Sorts the videos by what's being watched. Default value.
+        /// Sorts the videos by what's being watched.
         /// </summary>
         public static readonly SortBy BeingWatched = new SortBy("bw");
 
         /// <summary>
-        /// Sorts the videos by the most recently uploaded.
+        /// Sorts the videos by the most recently uploaded, default sorting.
         /// </summary>
         public static readonly SortBy MostRecent = new SortBy("mr");
 

@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace AnimmexAPI
 {
     public class VideoParser
     {
-        public static AnimmexVideo Parse(string videotext)
+        public static AnimmexVideo InfoParse(string videotext)
         {
             try
             {
@@ -38,6 +37,33 @@ namespace AnimmexAPI
             {
                 return new AnimmexVideo(0, videotext, "", 0, new int[] { 0, 0, 0 }, 0, 0, false);
             }
+        }
+
+        public static async Task<DirectLinks> StreamParse(HttpResult videopage, UserAgent ua, CookieContainer ck)
+        {
+            var link_sd = "";
+            var link_720 = "";
+            var link_1080 = "";
+
+            foreach (var streaminfo in videopage.Data.Split(new string[] { "<source src=" }, StringSplitOptions.None).Skip(1))
+            {
+                var temp_link = streaminfo.Split('"')[1];
+                var temp_result = await Http.DoGetAsync(temp_link, "https://www.animmex.net/search/", ua, ck, readdata: false);
+                if (streaminfo.Contains("1080p"))
+                {
+                    link_1080 = temp_result.FinalURL;
+                }
+                else if (streaminfo.Contains("720p"))
+                {
+                    link_720 = temp_result.FinalURL;
+                }
+                else if (streaminfo.Contains("sd.php"))
+                {
+                    link_sd = temp_result.FinalURL;
+                }
+            }
+
+            return new DirectLinks(link_sd, link_720, link_1080);
         }
     }
 }

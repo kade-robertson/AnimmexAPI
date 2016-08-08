@@ -40,22 +40,25 @@ namespace AnimmexAPI
         public async Task<List<AnimmexVideo>> Search(string search, VideoCategory category = default(VideoCategory), SortBy sorting = default(SortBy), UploadPeriod upperiod = default(UploadPeriod), bool keepinvalid = false)
         {
             category = category == default(VideoCategory) ? VideoCategory.All : category;
-            sorting = sorting == default(SortBy) ? SortBy.BeingWatched : sorting;
+            sorting = sorting == default(SortBy) ? SortBy.MostRecent : sorting;
             upperiod = upperiod == default(UploadPeriod) ? UploadPeriod.All : upperiod;
 
             var returnlist = new List<AnimmexVideo>();
+
             var result = await Http.DoGetAsync($"https://www.animmex.net/search/videos/{category.ToString()}?search_query={search}&o={sorting.ToString()}&t={upperiod.ToString()}",
                                                 "https://www.animmex.net/",
                                                 m_useragent,
                                                 m_cookies);
+
             foreach (string videotext in result.Data.Split(new string[] { "<div class=\"col-sm-6 col-md-4 col-lg-4\">" }, StringSplitOptions.None).Skip(1))
             {
-                var parsed = VideoParser.Parse(videotext);
+                var parsed = VideoParser.InfoParse(videotext);
                 if (keepinvalid || parsed.IsValid)
                 {
                     returnlist.Add(parsed);
                 }
             }
+
             return returnlist;
         }
 
@@ -127,6 +130,42 @@ namespace AnimmexAPI
         public async Task<List<AnimmexVideo>> GetLongest(string searchterm = "", bool keepinvalid = false)
         {
             return await Search(searchterm, sorting: SortBy.Longest, keepinvalid: keepinvalid);
+        }
+
+        /// <summary>
+        /// Returnbs the first result from a search, using default settings.
+        /// </summary>
+        /// <param name="searchterm">Search terms to be used for finding video.</param>
+        /// <returns>The first AnnimexVideo object found on the search page.</returns>
+        public async Task<AnimmexVideo> ImFeelingLucky(string searchterm = "")
+        {
+            var results = await Search(searchterm);
+            return results[0];
+        }
+
+        /// <summary>
+        /// Identifies all streaming links to an Animmex video by its ID.
+        /// </summary>
+        /// <param name="videoid">The video ID for which direct links should be grabbed.</param>
+        /// <returns>A DirectLinks object with the available streams.</returns>
+        public async Task<DirectLinks> GetDirectVideoLinkFromID(int videoid)
+        {
+            var video_page = await Http.DoGetAsync($"https://amx.4553t5pugtt1qslvsnmpc0tpfz5fo.xyz/KL8jJhGjUN0g3HuGhUHSa5XRZ9MVrjXUuvkbCmFyo1GBMFPhvcFyc7gGKdoBxSV/N3WPL4Y3RIcyKUcBunsEyFZal6Imwlrkgcf6E2ZSZG0M8AvvtcB1a.php?id={videoid}",
+                                                    "https://www.animmex.net/search/",
+                                                    m_useragent,
+                                                    m_cookies);
+
+            return await VideoParser.StreamParse(video_page, m_useragent, m_cookies);
+        }
+
+        /// <summary>
+        /// A wrapper for GetDirectVideoLinkFromID to be used with AnimmexVideo objects.
+        /// </summary>
+        /// <param name="video">The video for which direct links should be grabbed.</param>
+        /// <returns>A DirectLinks object with the available streams.</returns>
+        public async Task<DirectLinks> GetDirectVideoLink(AnimmexVideo video)
+        {
+            return await GetDirectVideoLinkFromID(video.ID);
         }
     }
 }

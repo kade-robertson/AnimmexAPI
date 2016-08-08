@@ -106,6 +106,10 @@ namespace AnimmexAPI
             m_isvalid = isvalid;
         }
 
+        /// <summary>
+        /// Resolves to be the title of the video.
+        /// </summary>
+        /// <returns>Title of the video.</returns>
         public override string ToString()
         {
             return m_title;

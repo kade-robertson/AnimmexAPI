@@ -26,6 +26,7 @@ namespace AnimmexAPI
                     try
                     {
                         client.DefaultRequestHeaders.UserAgent.ParseAdd(ua.ToString());
+                        if (!readdata) client.DefaultRequestHeaders.Range = new System.Net.Http.Headers.RangeHeaderValue(0, 1);
 
                         HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, url);
                         if (referer != string.Empty) requestMessage.Headers.Referrer = new Uri(referer);
@@ -71,6 +72,7 @@ namespace AnimmexAPI
                     try
                     {
                         client.DefaultRequestHeaders.UserAgent.ParseAdd(ua.ToString());
+                        if (!readdata) client.DefaultRequestHeaders.Range = new System.Net.Http.Headers.RangeHeaderValue(0, 1);
 
                         HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, url);
                         if (referer != string.Empty) requestMessage.Headers.Referrer = new Uri(referer);
@@ -103,10 +105,11 @@ namespace AnimmexAPI
         /// <param name="data">Data to parse.</param>
         /// <param name="before">String that comes before the desired data.</param>
         /// <param name="after">String that comes after the desired data.</param>
+        /// <param name="index">Optional index for splitting.</param>
         /// <returns>Data between the before and after strings.</returns>
-        public static string GetBetween(string data, string before, string after)
+        public static string GetBetween(string data, string before, string after, int index = 1)
         {
-            return data.Split(new string[] { before }, StringSplitOptions.None)[1].Split(new string[] { after }, StringSplitOptions.None)[0];
+            return data.Split(new string[] { before }, StringSplitOptions.None)[index].Split(new string[] { after }, StringSplitOptions.None)[0];
         }
     }
 }
