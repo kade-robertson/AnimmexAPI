@@ -40,6 +40,15 @@
             return m_sd480;
         }
     }
+
+    /// <summary>
+    /// Property which indicates whether any links were found.
+    /// </summary>
+    public bool LinksFound {
+        get {
+            return (m_hd1080 != "") || (m_hd720 != "") || (m_sd480 != "");
+        }
+    }
     
     /// <summary>
     /// Creates a DirectLinks object for the user to interface with.

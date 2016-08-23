@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -47,20 +48,24 @@ namespace AnimmexAPI
 
             foreach (var streaminfo in videopage.Data.Split(new string[] { "<source src=" }, StringSplitOptions.None).Skip(1))
             {
-                var temp_link = streaminfo.Split('"')[1];
-                var temp_result = await Http.DoGetAsync(temp_link, "https://www.animmex.net/search/", ua, ck, readdata: false);
-                if (streaminfo.Contains("1080p"))
+                try
                 {
-                    link_1080 = temp_result.FinalURL;
+                    var temp_link = streaminfo.Split('"')[1];
+                    var temp_result = await Http.DoGetAsync(temp_link, "https://www.animmex.net/search/", ua, ck, readdata: false);
+                    if (streaminfo.Contains("1080p"))
+                    {
+                        link_1080 = temp_result.FinalURL;
+                    }
+                    else if (streaminfo.Contains("720p"))
+                    {
+                        link_720 = temp_result.FinalURL;
+                    }
+                    else if (streaminfo.Contains("sd.php"))
+                    {
+                        link_sd = temp_result.FinalURL;
+                    }
                 }
-                else if (streaminfo.Contains("720p"))
-                {
-                    link_720 = temp_result.FinalURL;
-                }
-                else if (streaminfo.Contains("sd.php"))
-                {
-                    link_sd = temp_result.FinalURL;
-                }
+                catch { /* This behaves as intended, especially if user uses BestQualityStream. */ }
             }
 
             return new DirectLinks(link_sd, link_720, link_1080);
