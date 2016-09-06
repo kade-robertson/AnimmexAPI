@@ -61,3 +61,7 @@ Notes
 This project is simply as an experiment for myself, expect this code not to
 necessarily be held to production standards or the like. I will however mark
 this under the MIT License so it is available to be used freely.
+
+This project now makes use of the ModernHTTPClient NuGet package to solve security
+issues found on Android devices. This update was included in the latest build of
+Animmex-Video. 

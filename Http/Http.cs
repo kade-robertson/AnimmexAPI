@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using ModernHttpClient;
 
 namespace AnimmexAPI
 {
@@ -18,7 +19,7 @@ namespace AnimmexAPI
         /// <returns>An HttpResult object containing the data and last visited URL, wrapped in a Task.</returns>
         public static async Task<HttpResult> DoGetAsync(string url, string referer, UserAgent ua = default(UserAgent), CookieContainer cookies = default(CookieContainer), bool readdata = true)
         {
-            using (var handler = new HttpClientHandler() { /*UseProxy = false, Proxy = null,*/ UseCookies = true })
+            using (var handler = new NativeMessageHandler() { /*UseProxy = false, Proxy = null,*/ UseCookies = true })
             {
                 handler.CookieContainer = cookies == default(CookieContainer) ? new CookieContainer() : cookies;
                 using (var client = new HttpClient(handler))
@@ -64,7 +65,7 @@ namespace AnimmexAPI
         /// <returns>An HttpResult object containing the data and last visited URL, wrapped in a Task.</returns>
         public static async Task<HttpResult> DoPostAsync(string url, string referer, UserAgent ua = default(UserAgent), CookieContainer cookies = default(CookieContainer), FormUrlEncodedContent postdata = default(FormUrlEncodedContent), bool readdata = true)
         {
-            using (var handler = new HttpClientHandler() { /*UseProxy = false, Proxy = null,*/ UseCookies = true })
+            using (var handler = new NativeMessageHandler() { /*UseProxy = false, Proxy = null,*/ UseCookies = true })
             {
                 handler.CookieContainer = cookies == default(CookieContainer) ? new CookieContainer() : cookies;
                 using (var client = new HttpClient(handler))

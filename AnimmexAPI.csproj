@@ -52,9 +52,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Annimex\AnimmexClient.cs" />
     <Compile Include="Annimex\AnimmexVideo.cs" />
     <Compile Include="Annimex\DirectLinks.cs" />
@@ -66,6 +63,15 @@
     <Compile Include="Http\HttpResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Http\UserAgent.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ModernHttpClient, Version=2.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\modernhttpclient.2.4.2\lib\Portable-Net45+WinRT45+WP8+WPA81\ModernHttpClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
