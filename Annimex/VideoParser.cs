@@ -46,11 +46,11 @@ namespace AnimmexAPI
             var link_720 = "";
             var link_1080 = "";
 
-            foreach (var streaminfo in videopage.Data.Split(new string[] { "<source src=" }, StringSplitOptions.None).Skip(1))
+            foreach (var streaminfo in videopage.Data.Split(new string[] { "<source src=" }, StringSplitOptions.None))
             {
+                var temp_link = streaminfo.Split('"')[1];
                 try
                 {
-                    var temp_link = streaminfo.Split('"')[1];
                     var temp_result = await Http.DoGetAsync(temp_link, "https://www.animmex.net/search/", ua, ck, readdata: false);
                     if (streaminfo.Contains("1080p"))
                     {
@@ -65,7 +65,24 @@ namespace AnimmexAPI
                         link_sd = temp_result.FinalURL;
                     }
                 }
-                catch { /* This behaves as intended, especially if user uses BestQualityStream. */ }
+                catch
+                {   
+                    // Weird thing with their backend, they still link to a fake 720p stream which will 404, but if you take the SD stream they have
+                    // available, it is actually at 720p and not some SD resolution.
+                    if (streaminfo.Contains("mp4hd.php"))
+                    {
+                        if (link_sd != "")
+                        {
+                            link_720 = link_sd;
+                            link_sd = "";
+                        }
+                        else
+                        {
+                            var temp_result = await Http.DoGetAsync(temp_link.Replace("mp4hd", "mp4sd"), "https://www.animmex.net/search/", ua, ck, readdata: false);
+                            link_720 = temp_result.FinalURL;
+                        }
+                    }
+                }
             }
 
             return new DirectLinks(link_sd, link_720, link_1080);
