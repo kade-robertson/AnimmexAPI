@@ -9,8 +9,8 @@ after_success:
   - REPO=`git config remote.origin.url`
   - SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:kade-robertson/AnimmexAPI.git}
   - SHA=`git rev-parse --verify HEAD`
+  - cd bin\Release
   - git checkout --orphan gh-pages
-  - git rm -rf . # Does not remove .gitignored files
   - git pull origin gh-pages
   - git status
   - if [[ -z `git diff --exit-code` ]]; then echo "No changes to the output on this push; exiting."; exit 0; fi
