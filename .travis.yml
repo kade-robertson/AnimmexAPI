@@ -4,6 +4,7 @@ language: csharp
 solution: AnimmexAPI.sln
 
 after_success:
+  - ls -al
   - if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then echo "Don't build this"; exit 0; fi
   - REPO=`git config remote.origin.url`
   - SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:kade-robertson/AnimmexAPI.git}
