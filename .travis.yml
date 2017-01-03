@@ -9,7 +9,8 @@ after_success:
   - REPO=`git config remote.origin.url`
   - SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:kade-robertson/AnimmexAPI.git}
   - SHA=`git rev-parse --verify HEAD`
-  - cd bin\Release
+  - cd bin/Release
+  - ls -al
   - git checkout --orphan gh-pages
   - git pull origin gh-pages
   - git status
@@ -32,6 +33,6 @@ after_success:
 
 env:
   global:
-  - ENCRYPTION_LABEL: "23cbfbb79321"
+  - ENCRYPTION_LABEL: "37e98f6522e8"
   - COMMIT_AUTHOR_EMAIL: "travis_build_key@example.com"
   
