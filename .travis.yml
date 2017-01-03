@@ -4,15 +4,14 @@ language: csharp
 solution: AnimmexAPI.sln
 
 after_success:
-  - ls -al
-  - if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then echo "Don't build this"; exit 0; fi
-  - REPO=`git config remote.origin.url`
-  - SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:kade-robertson/AnimmexAPI.git}
+  - shopt -s extglob
+  - mv /bin/Release/AnimmexAPI.dll AnimmexAPI.dll
+  - mv /bin/Release/ModernHttpClient.dll ModernHttpClient.dll
+  - rm !(AnimmexAPI.dll ModernHttpClient.dll)
+  - git clone https://github.com/kade-robertson/AnimmexAPI.git
   - SHA=`git rev-parse --verify HEAD`
-  - cd bin/Release
   - git checkout --orphan gh-pages
   - git pull origin gh-pages
-  - ls -al
   - git status
   - if [[ -z `git diff --exit-code` ]]; then echo "No changes to the output on this push; exiting."; exit 0; fi
   - git config user.name "Travis CI"
