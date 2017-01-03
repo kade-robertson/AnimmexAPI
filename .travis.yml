@@ -10,16 +10,16 @@ after_success:
   - SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:kade-robertson/AnimmexAPI.git}
   - SHA=`git rev-parse --verify HEAD`
   - cd bin/Release
-  - ls -al
   - git checkout --orphan gh-pages
   - git pull origin gh-pages
+  - ls -al
   - git status
   - if [[ -z `git diff --exit-code` ]]; then echo "No changes to the output on this push; exiting."; exit 0; fi
   - git config user.name "Travis CI"
   - git config user.email "travis_build_key@example.com"
   - rm master-build.zip
-  - zip master-build.zip AnimmexAPI.dll ModernHTTPClient.dll
-  - git add master-build.zip
+  - zip master-build.zip AnimmexAPI.dll ModernHttpClient.dll
+  - git add -f master-build.zip
   - git commit -m "deploy to GitHub Pages $SHA"
   - ENCRYPTED_KEY_VAR="encrypted_${ENCRYPTION_LABEL}_key"
   - ENCRYPTED_IV_VAR="encrypted_${ENCRYPTION_LABEL}_iv"
