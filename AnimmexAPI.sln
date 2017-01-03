@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimmexAPI", "AnimmexAPI.csproj", "{37465DE0-7FA0-4E89-8113-B624C1539F69}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimmexTest", "..\AnimmexTest\AnimmexTest.csproj", "{14524DC0-75CF-4A9D-A53C-035B3EE7AC1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +21,6 @@ Global
 		{37465DE0-7FA0-4E89-8113-B624C1539F69}.Release|Any CPU.Build.0 = Release|Any CPU
 		{37465DE0-7FA0-4E89-8113-B624C1539F69}.Release|ARM.ActiveCfg = Release|ARM
 		{37465DE0-7FA0-4E89-8113-B624C1539F69}.Release|ARM.Build.0 = Release|ARM
-		{14524DC0-75CF-4A9D-A53C-035B3EE7AC1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{14524DC0-75CF-4A9D-A53C-035B3EE7AC1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{14524DC0-75CF-4A9D-A53C-035B3EE7AC1E}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{14524DC0-75CF-4A9D-A53C-035B3EE7AC1E}.Debug|ARM.Build.0 = Debug|Any CPU
-		{14524DC0-75CF-4A9D-A53C-035B3EE7AC1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{14524DC0-75CF-4A9D-A53C-035B3EE7AC1E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{14524DC0-75CF-4A9D-A53C-035B3EE7AC1E}.Release|ARM.ActiveCfg = Release|Any CPU
-		{14524DC0-75CF-4A9D-A53C-035B3EE7AC1E}.Release|ARM.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
