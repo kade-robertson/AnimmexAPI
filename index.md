@@ -1,6 +1,6 @@
 AnimmexAPI
 ==========
-[![GitHub stars](https://img.shields.io/github/stars/kade-robertson/AnimmexAPI.svg)](https://github.com/kade-robertson/AnimmexAPI/stargazers) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kade-robertson/AnimmexAPI/master/LICENSE.md)
+[![GitHub stars](https://img.shields.io/github/stars/kade-robertson/AnimmexAPI.svg)](https://github.com/kade-robertson/AnimmexAPI/stargazers) [![Build Status](https://travis-ci.org/kade-robertson/AnimmexAPI.svg?branch=master)](https://travis-ci.org/kade-robertson/AnimmexAPI/builds#) [![GitHub license](https://img.shields.io/badge/license-MIT-orange.svg)](https://raw.githubusercontent.com/kade-robertson/AnimmexAPI/master/LICENSE.md)
 
 Animmex is a not-so-popular website hosted in Russia that provides a platforrm
 to update and watch videos of all kinds. However, it is ad-riddled and you are
@@ -28,8 +28,8 @@ environments are as follows:
 Documentation
 =============
 
-All of the functions and classes have XML documentation supported by Xamarin,
-although a wiki with more information will be available in the future.
+All of the functions and classes have XML documentation supported by Xamarin.
+You can also find documentation on the project [wiki page](https://github.com/kade-robertson/AnimmexAPI/wiki).
 
 Example Usage
 =============
@@ -61,3 +61,7 @@ Notes
 This project is simply as an experiment for myself, expect this code not to
 necessarily be held to production standards or the like. I will however mark
 this under the MIT License so it is available to be used freely.
+
+This project now makes use of the ModernHTTPClient NuGet package to solve security
+issues found on Android devices. This update was included in the latest build of
+Animmex-Video. 
