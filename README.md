@@ -31,6 +31,15 @@ Documentation
 All of the functions and classes have XML documentation supported by Xamarin.
 You can also find documentation on the project [wiki page](https://github.com/kade-robertson/AnimmexAPI/wiki).
 
+Installation
+=============
+
+You have a couple of options for how to use this code:
+
+1. You can clone this repository, and build it either through Visual Studio or Mono. This will give you the latest features and fixes before they make it into official releases.
+2. You can check the Releases tab of this repository. Every time I feel that there have been enough changes to warrant a new release, this will be updated. This is convenient for those who won't need new features as they come along (they are happy with the library as-is), but it means you will have to download new versions as they are released. Alternatively:
+3. You can download the package straight from NuGet! This can be done manually through the website [here](https://www.nuget.org/packages/AnimmexAPI/), or by adding it to your project either through the Package Manager, or through the Package Manager Console using the command `Install-Package AnimmexAPI`
+
 Example Usage
 =============
 
