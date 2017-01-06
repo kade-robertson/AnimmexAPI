@@ -150,7 +150,7 @@ namespace AnimmexAPI
         /// <returns>A DirectLinks object with the available streams.</returns>
         public async Task<DirectLinks> GetDirectVideoLinksFromID(int videoid)
         {
-            var video_page = await Http.DoGetAsync($"https://amx.4553t5pugtt1qslvsnmpc0tpfz5fo.xyz/KL8jJhGjUN0g3HuGhUHSa5XRZ9MVrjXUuvkbCmFyo1GBMFPhvcFyc7gGKdoBxSV/N3WPL4Y3RIcyKUcBunsEyFZal6Imwlrkgcf6E2ZSZG0M8AvvtcB1a.php?id={videoid}",
+            var video_page = await Http.DoGetAsync($"https://amx.4553t5pugtt1qslvsnmpc0tpfz5fo.xyz/KL8jJhGjUN0g3HuGhUHSa5XRZ9MVrjXUuvkbCmFyo1GBMFPhvcFyc7gGKdoBxSV/N3WPL4Y3RIcyKUcBunsEyFZal6Imwlrkgcf6E2ZSZG0M8AvvtcB1.php?id={videoid}",
                                                     "https://www.animmex.net/search/",
                                                     m_useragent,
                                                     m_cookies);
