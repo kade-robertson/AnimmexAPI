@@ -8,6 +8,7 @@ namespace AnimmexAPI
 {
     public class AnimmexClient
     {
+        private static string endpoint = "https://amx.4553t5pugtt1qslvsnmpc0tpfz5fo.xyz/KL8jJhGjUN0g3HuGhUHSa5XRZ9MVrjXUuvkbCmFyo1GBMFPhvcFyc7gGKdoBxSV/N3WPL4Y3RIcyKUcBunsEyFZal6Imwlrkgcf6E2ZSZG0M8AvvtcB1.php?id={0}";
         /// <summary>
         /// Holds the cookies collected from making requests.
         /// </summary>
@@ -26,6 +27,11 @@ namespace AnimmexAPI
         {
             m_useragent = useragent == null ? UserAgent.Chrome : useragent;
             m_cookies = new CookieContainer();
+            UpdateEndpoint();
+        }
+
+        public async void UpdateEndpoint() {
+            endpoint = (await Http.DoGetAsync("https://github.com/kade-robertson/AnimmexAPI/blob/master/animmex-endpoint.txt", "https://github.com/")).Data;
         }
 
         /// <summary>
@@ -150,7 +156,7 @@ namespace AnimmexAPI
         /// <returns>A DirectLinks object with the available streams.</returns>
         public async Task<DirectLinks> GetDirectVideoLinksFromID(int videoid)
         {
-            var video_page = await Http.DoGetAsync($"https://amx.4553t5pugtt1qslvsnmpc0tpfz5fo.xyz/KL8jJhGjUN0g3HuGhUHSa5XRZ9MVrjXUuvkbCmFyo1GBMFPhvcFyc7gGKdoBxSV/N3WPL4Y3RIcyKUcBunsEyFZal6Imwlrkgcf6E2ZSZG0M8AvvtcB1.php?id={videoid}",
+            var video_page = await Http.DoGetAsync(string.Format(endpoint, videoid),
                                                     "https://www.animmex.net/search/",
                                                     m_useragent,
                                                     m_cookies);
