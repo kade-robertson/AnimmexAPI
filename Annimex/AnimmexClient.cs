@@ -45,6 +45,27 @@ namespace AnimmexAPI
             return VideoParser.VideoPageParse(id, result.Data);
         }
 
+        public async Task<List<AnimmexVideo>> GetVideos(int page = 1, bool keepinvalid = false)
+        {
+            var retlist = new List<AnimmexVideo>();
+
+            var result = await Http.DoGetAsync($"https://www.animmex.net/search/videos?search_query=&page={page}",
+                                    "https://www.animmex.net/",
+                                    m_useragent,
+                                    m_cookies);
+
+            foreach (string videotext in result.Data.Split(new string[] { "<div class=\"col-sm-6 col-md-4 col-lg-4\">" }, StringSplitOptions.None).Skip(1))
+            {
+                var parsed = VideoParser.InfoParse(videotext);
+                if (keepinvalid || parsed.IsValid)
+                {
+                    retlist.Add(parsed);
+                }
+            }
+
+            return retlist;
+        }
+
         /// <summary>
         /// Gets a list of videos pertaining to the search conditions.
         /// </summary>
@@ -172,7 +193,7 @@ namespace AnimmexAPI
                                                     m_useragent,
                                                     m_cookies);
 
-            return await VideoParser.StreamParse(video_page, m_useragent, m_cookies);
+            return VideoParser.StreamParse(video_page, m_useragent, m_cookies);
         }
 
         /// <summary>

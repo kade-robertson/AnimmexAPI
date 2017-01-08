@@ -61,19 +61,29 @@ namespace AnimmexAPI
             }
         }
 
-        public static async Task<DirectLinks> StreamParse(HttpResult videopage, UserAgent ua, CookieContainer ck)
+        public static DirectLinks StreamParse(HttpResult videopage, UserAgent ua, CookieContainer ck)
         {
             var link_sd = "";
             var link_720 = "";
             var link_1080 = "";
+            var link_1440 = "";
+            var link_4k = "";
 
-            foreach (var streaminfo in videopage.Data.Split(new string[] { "<source src=" }, StringSplitOptions.None))
+            foreach (var streaminfo in videopage.Data.Split(new string[] { "<source src=" }, StringSplitOptions.None).Skip(1))
             {
                 var temp_link = streaminfo.Split('"')[1];
                 try
                 {
                     //var temp_result = await Http.DoGetAsync(temp_link, "https://www.animmex.net/search/", ua, ck, readdata: false);
-                    if (streaminfo.Contains("1080p"))
+                    if (streaminfo.Contains("4k") || streaminfo.Contains("2160"))
+                    {
+                        link_4k = temp_link;
+                    }
+                    else if (streaminfo.Contains("1440p"))
+                    {
+                        link_1440 = temp_link;
+                    }
+                    else if (streaminfo.Contains("1080p"))
                     {
                         link_1080 = temp_link;
                     }
@@ -106,7 +116,7 @@ namespace AnimmexAPI
                 }
             }
 
-            return new DirectLinks(link_sd, link_720, link_1080);
+            return new DirectLinks(link_sd, link_720, link_1080, link_1440, link_4k);
         }
     }
 }
