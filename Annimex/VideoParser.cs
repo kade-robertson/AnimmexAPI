@@ -40,6 +40,27 @@ namespace AnimmexAPI
             }
         }
 
+        public static AnimmexVideo VideoPageParse(int id, string videotext)
+        {
+            try
+            {
+                int likes = int.Parse(Http.GetBetween(videotext, "<span id=\"video_likes\" class=\"text-white\">", ""));
+                int dislikes = int.Parse(Http.GetBetween(videotext, "<span id=\"video_dislikes\" class=\"text-white\">", ""));
+                return new AnimmexVideo(id, 
+                                        Http.GetBetween(videotext, "<meta property=\"og:title\" content=\"", "\">"),
+                                        Http.GetBetween(videotext, "<meta property=\"og:image\" content=\"", "\">"),
+                                        int.Parse(Http.GetBetween(videotext, "<span class=\"text-white\">", " days ago<")), 
+                                        new int[] { 0, 0, 0 }, // unfortunately can't get duration info 
+                                        int.Parse(Http.GetBetween(videotext, "<span class=\"text-white\">", "<", 2)), 
+                                        (int) Math.Round((double) 100 * (likes / (likes + dislikes))), 
+                                        true);
+            }
+            catch
+            {
+                return new AnimmexVideo(0, videotext, "", 0, new int[] { 0, 0, 0 }, 0, 0, false);
+            }
+        }
+
         public static async Task<DirectLinks> StreamParse(HttpResult videopage, UserAgent ua, CookieContainer ck)
         {
             var link_sd = "";

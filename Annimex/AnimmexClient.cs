@@ -36,6 +36,15 @@ namespace AnimmexAPI
             m_endpoint = (await Http.DoGetAsync("https://github.com/kade-robertson/AnimmexAPI/raw/master/animmex-endpoint.txt", "https://github.com/", m_useragent, m_cookies)).Data;
         }
 
+        public async Task<AnimmexVideo> GetDetailsFromVideoID(int id)
+        {
+            var result = await Http.DoGetAsync($"",
+                                                "https://www.animmex.net/",
+                                                m_useragent,
+                                                m_cookies);
+            return VideoParser.VideoPageParse(id, result.Data);
+        }
+
         /// <summary>
         /// Gets a list of videos pertaining to the search conditions.
         /// </summary>
