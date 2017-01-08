@@ -44,8 +44,8 @@ namespace AnimmexAPI
         {
             try
             {
-                int likes = int.Parse(Http.GetBetween(videotext, "<span id=\"video_likes\" class=\"text-white\">", ""));
-                int dislikes = int.Parse(Http.GetBetween(videotext, "<span id=\"video_dislikes\" class=\"text-white\">", ""));
+                int likes = int.Parse(Http.GetBetween(videotext, "<span id=\"video_likes\" class=\"text-white\">", "</span>"));
+                int dislikes = int.Parse(Http.GetBetween(videotext, "<span id=\"video_dislikes\" class=\"text-white\">", "</span>"));
                 return new AnimmexVideo(id, 
                                         Http.GetBetween(videotext, "<meta property=\"og:title\" content=\"", "\">"),
                                         Http.GetBetween(videotext, "<meta property=\"og:image\" content=\"", "\">"),
