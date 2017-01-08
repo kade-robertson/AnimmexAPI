@@ -38,7 +38,7 @@ namespace AnimmexAPI
 
         public async Task<AnimmexVideo> GetDetailsFromVideoID(int id)
         {
-            var result = await Http.DoGetAsync($"",
+            var result = await Http.DoGetAsync($"https://www.animmex.net/video/{id}/",
                                                 "https://www.animmex.net/",
                                                 m_useragent,
                                                 m_cookies);
