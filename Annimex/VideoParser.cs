@@ -72,18 +72,18 @@ namespace AnimmexAPI
                 var temp_link = streaminfo.Split('"')[1];
                 try
                 {
-                    var temp_result = await Http.DoGetAsync(temp_link, "https://www.animmex.net/search/", ua, ck, readdata: false);
+                    //var temp_result = await Http.DoGetAsync(temp_link, "https://www.animmex.net/search/", ua, ck, readdata: false);
                     if (streaminfo.Contains("1080p"))
                     {
-                        link_1080 = temp_result.FinalURL;
+                        link_1080 = temp_link;
                     }
                     else if (streaminfo.Contains("720p"))
                     {
-                        link_720 = temp_result.FinalURL;
+                        link_720 = temp_link;
                     }
                     else if (streaminfo.Contains("sd.php"))
                     {
-                        link_sd = temp_result.FinalURL;
+                        link_sd = temp_link;
                     }
                 }
                 catch
@@ -99,8 +99,8 @@ namespace AnimmexAPI
                         }
                         else
                         {
-                            var temp_result = await Http.DoGetAsync(temp_link.Replace("mp4hd", "mp4sd"), "https://www.animmex.net/search/", ua, ck, readdata: false);
-                            link_720 = temp_result.FinalURL;
+                            //var temp_result = await Http.DoGetAsync(temp_link.Replace("mp4hd", "mp4sd"), "https://www.animmex.net/search/", ua, ck, readdata: false);
+                            link_720 = temp_link.Replace("mp4hd", "mp4sd");
                         }
                     }
                 }
