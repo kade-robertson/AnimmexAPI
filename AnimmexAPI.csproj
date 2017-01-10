@@ -54,13 +54,13 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Annimex\AnimmexClient.cs" />
-    <Compile Include="Annimex\AnimmexVideo.cs" />
-    <Compile Include="Annimex\DirectLinks.cs" />
-    <Compile Include="Annimex\SortBy.cs" />
-    <Compile Include="Annimex\UploadPeriod.cs" />
-    <Compile Include="Annimex\VideoCategory.cs" />
-    <Compile Include="Annimex\VideoParser.cs" />
+    <Compile Include="Animmex\AnimmexClient.cs" />
+    <Compile Include="Animmex\AnimmexVideo.cs" />
+    <Compile Include="Animmex\DirectLinks.cs" />
+    <Compile Include="Animmex\SortBy.cs" />
+    <Compile Include="Animmex\UploadPeriod.cs" />
+    <Compile Include="Animmex\VideoCategory.cs" />
+    <Compile Include="Animmex\VideoParser.cs" />
     <Compile Include="Http\Http.cs" />
     <Compile Include="Http\HttpResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
