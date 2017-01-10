@@ -45,7 +45,9 @@ Example Usage
 
 There are quite a few functions that have been built in now, mostly catering to
 the video functionality of the website. The best way right now to use them is to
-browse the source until I have documentation set up.
+browse the documentation. However, sometimes features are added to the current
+code and not immediately added to the wiki, so if something is missing check the
+code.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 var api = new AnimmexClient();
