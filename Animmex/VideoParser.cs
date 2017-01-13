@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace AnimmexAPI
 {
@@ -117,6 +118,12 @@ namespace AnimmexAPI
             }
 
             return new DirectLinks(link_sd, link_720, link_1080, link_1440, link_4k);
+        }
+
+        public static DirectLinks CacheParse(HttpResult videopage)
+        {
+            var data = JsonConvert.DeserializeObject<CachedLinks>(videopage.Data);
+            return new DirectLinks(data.StreamSD, data.Stream720p, data.Stream1080p, data.Stream1440p, data.Stream2160p);
         }
     }
 }

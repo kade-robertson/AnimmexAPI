@@ -205,5 +205,23 @@ namespace AnimmexAPI
         {
             return await GetDirectVideoLinksFromID(video.ID);
         }
+
+        public async Task<DirectLinks> GetCachedVideoLinksFromID(int videoid)
+        {
+            var small = videoid % 10;
+            var medium = (videoid / 10) % 10;
+            var big = (videoid / 100) % 10;
+            var lg = videoid / 1000;
+            var video_page = await Http.DoGetAsync($"https://animmex-cacher.github.io/files/cache/{lg}/{big}/{medium}/{small}.json",
+                                                    "https://www.animmex.net/search/",
+                                                    m_useragent,
+                                                    m_cookies);
+            return VideoParser.CacheParse(video_page);
+        }
+
+        public async Task<DirectLinks> GetCachedVideoLinks(AnimmexVideo vid)
+        {
+            return await GetCachedVideoLinksFromID(vid.ID);
+        }
     }
 }
