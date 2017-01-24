@@ -2,7 +2,9 @@
 
 # AnimmexAPI
 
-[![GitHub stars](https://img.shields.io/github/stars/kade-robertson/AnimmexAPI.svg)](https://github.com/kade-robertson/AnimmexAPI/stargazers) [![Build Status](https://travis-ci.org/kade-robertson/AnimmexAPI.svg?branch=master)](https://travis-ci.org/kade-robertson/AnimmexAPI/builds#) [![GitHub license](https://img.shields.io/badge/license-MIT-orange.svg)](https://raw.githubusercontent.com/kade-robertson/AnimmexAPI/master/LICENSE.md)
+[![GitHub stars](https://img.shields.io/github/stars/kade-robertson/AnimmexAPI.svg)](https://github.com/kade-robertson/AnimmexAPI/stargazers) [![Build Status](https://travis-ci.org/kade-robertson/AnimmexAPI.svg?branch=master)](https://travis-ci.org/kade-robertson/AnimmexAPI/builds#) [![GitHub license](https://img.shields.io/badge/license-MIT-orange.svg)](https://raw.githubusercontent.com/kade-robertson/AnimmexAPI/master/LICENSE.md) [![Release](https://img.shields.io/github/release/kade-robertson/AnimmexAPI.svg)](https://github.com/kade-robertson/AnimmexAPI/releases)
+
+[Source Code](https://github.com/kade-robertson/AnimmexAPI) \| [View on NuGet](https://www.nuget.org/packages/AnimmexAPI) \| [My Website](http://kaderobertson.pw/)
 
 -----
 
@@ -28,6 +30,8 @@ environments are as follows:
 -   Xamarin.iOS
 
 -   Xamarin.iOS (Classic)
+
+AnimmexAPI follows the versioning rules laid out by [Semantic Versioning 2.0.0](http://semver.org/).
 
 Documentation
 =============
