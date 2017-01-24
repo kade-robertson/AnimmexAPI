@@ -67,6 +67,7 @@ h1 {
 code, kbd, pre, samp, tt { 
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace; 
   font-size: 12px; 
+  padding: 5px;
 }
 pre {
   margin-top: 0; 
