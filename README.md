@@ -1,5 +1,7 @@
-AnimmexAPI
-==========
+----
+
+# AnimmexAPI
+
 [![GitHub stars](https://img.shields.io/github/stars/kade-robertson/AnimmexAPI.svg)](https://github.com/kade-robertson/AnimmexAPI/stargazers) [![Build Status](https://travis-ci.org/kade-robertson/AnimmexAPI.svg?branch=master)](https://travis-ci.org/kade-robertson/AnimmexAPI/builds#) [![GitHub license](https://img.shields.io/badge/license-MIT-orange.svg)](https://raw.githubusercontent.com/kade-robertson/AnimmexAPI/master/LICENSE.md)
 
 Animmex is a not-so-popular website hosted in Russia that provides a platforrm
