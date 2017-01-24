@@ -6,6 +6,36 @@ using System.Threading.Tasks;
 
 namespace AnimmexAPI
 {
+    /// <summary>
+    /// Enumeration of the different available video qualities.
+    /// </summary>
+    public enum VideoQuality {
+        /// <summary>
+        /// Standard definition (480p and below).
+        /// </summary>
+        SD,
+        /// <summary>
+        /// High definition (720p).
+        /// </summary>
+        HD,
+        /// <summary>
+        /// Full high definition (1080p).
+        /// </summary>
+        FullHD,
+        /// <summary>
+        /// Quad high definition (1440p).
+        /// </summary>
+        QuadHD,
+        /// <summary>
+        /// Ultra high definition (2160p).
+        /// </summary>
+        UHD,
+        /// <summary>
+        /// Best quality available.
+        /// </summary>
+        Best
+    }
+
     public class AnimmexClient
     {
         private string m_endpoint = "https://amx.4553t5pugtt1qslvsnmpc0tpfz5fo.xyz/KL8jJhGjUN0g3HuGhUHSa5XRZ9MVrjXUuvkbCmFyo1GBMFPhvcFyc7gGKdoBxSV/N3WPL4Y3RIcyKUcBunsEyFZal6Imwlrkgcf6E2ZSZG0M8AvvtcB1.php?id={0}";
@@ -239,8 +269,36 @@ namespace AnimmexAPI
         /// </summary>
         /// <param name="phpstr">The URL that needs to be resolved (from a DirectLinks object)</param>
         /// <returns>A string directly linking to the requested media.</returns>
-        public async Task<string> GetDirectStreamLink(string phpstr) {
+        public async Task<string> GetDirectStreamLinkFromServer(string phpstr) {
             return (await Http.DoGetAsync(phpstr, "https://www.animmex.net/search/", m_useragent, m_cookies, readdata: false)).FinalURL;
+        }
+
+        /// <summary>
+        /// Obtain a direct link to the media of the specified quality.
+        /// </summary>
+        /// <param name="d">The DirectLinks object containing the link data.</param>
+        /// <param name="q">The video quality of the desired stream. Default is best available.</param>
+        /// <returns>A string directly linking to the requested media.</returns>
+        public async Task<string> GetDirectStreamLink(DirectLinks d, VideoQuality q = VideoQuality.Best) {
+            switch (q) {
+                case VideoQuality.SD: return await GetDirectStreamLinkFromServer(d.StreamSD);
+                case VideoQuality.HD: return await GetDirectStreamLinkFromServer(d.Stream720p);
+                case VideoQuality.FullHD: return await GetDirectStreamLinkFromServer(d.Stream1080p);
+                case VideoQuality.QuadHD: return await GetDirectStreamLinkFromServer(d.Stream1440p);
+                case VideoQuality.UHD: return await GetDirectStreamLinkFromServer(d.Stream2160p);
+            }
+            return await GetDirectStreamLinkFromServer(d.BestQualityStream);
+        }
+
+        /// <summary>
+        /// Obtain a direct link to the media of the specified quality.
+        /// </summary>
+        /// <param name="v">The AnimmexVideo object for which the links are desired.</param>
+        /// <param name="d">The video quality of the desired stream. Default is best available.</param>
+        /// <param name="fromcache">A boolean switch to determine if links should come from cache or directly from the server.</param>
+        /// <returns>A string directly linking to the requested media.</returns>
+        public async Task<string> GetDirectStreamLink(AnimmexVideo v, VideoQuality d = VideoQuality.Best, bool fromcache = true) {
+            return await (fromcache ? GetDirectStreamLink(await GetCachedVideoLinks(v), d) : GetDirectStreamLink(await GetDirectVideoLinks(v), d));
         }
     }
 }
