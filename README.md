@@ -29,6 +29,8 @@ environments are as follows:
 
 -   Xamarin.iOS (Classic)
 
+AnimmexAPI follows the versioning rules laid out by [Semantic Versioning 2.0.0](http://semver.org/).
+
 Documentation
 =============
 
