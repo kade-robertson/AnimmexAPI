@@ -206,6 +206,11 @@ namespace AnimmexAPI
             return await GetDirectVideoLinksFromID(video.ID);
         }
 
+        /// <summary>
+        /// Identifies all cached links to an Animmex video by its ID
+        /// </summary>
+        /// <param name="videoid">The video ID for which cached links should be grabbed.</param>
+        /// <returns>A DirectLinks object with the cached streams.</returns>
         public async Task<DirectLinks> GetCachedVideoLinksFromID(int videoid)
         {
             var small = videoid % 10;
@@ -219,9 +224,23 @@ namespace AnimmexAPI
             return VideoParser.CacheParse(video_page);
         }
 
+        /// <summary>
+        /// A wrapper for GetCachedVideoLinksFromID to be used with AnimmexVideo objects.
+        /// </summary>
+        /// <param name="vid">The video for which cached links should be grabbed.</param>
+        /// <returns>A DirectLinks object with the cached streams.</returns>
         public async Task<DirectLinks> GetCachedVideoLinks(AnimmexVideo vid)
         {
             return await GetCachedVideoLinksFromID(vid.ID);
+        }
+
+        /// <summary>
+        /// Obtain a direct link to the media, can be used instead of cached links to support devices that need direct links to stream.
+        /// </summary>
+        /// <param name="phpstr">The URL that needs to be resolved (from a DirectLinks object)</param>
+        /// <returns>A string directly linking to the requested media.</returns>
+        public async Task<string> GetDirectStreamLink(string phpstr) {
+            return (await Http.DoGetAsync(phpstr, "https://www.animmex.net/search/", m_useragent, m_cookies, readdata: false)).FinalURL;
         }
     }
 }

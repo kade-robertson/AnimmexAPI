@@ -73,44 +73,26 @@ namespace AnimmexAPI
             foreach (var streaminfo in videopage.Data.Split(new string[] { "<source src=" }, StringSplitOptions.None).Skip(1))
             {
                 var temp_link = streaminfo.Split('"')[1];
-                try
-                {
-                    //var temp_result = await Http.DoGetAsync(temp_link, "https://www.animmex.net/search/", ua, ck, readdata: false);
-                    if (streaminfo.Contains("4k") || streaminfo.Contains("2160"))
-                    {
+                try {
+                    if (streaminfo.Contains("4k") || streaminfo.Contains("2160")) {
                         link_4k = temp_link;
-                    }
-                    else if (streaminfo.Contains("1440p"))
-                    {
+                    } else if (streaminfo.Contains("1440p")) {
                         link_1440 = temp_link;
-                    }
-                    else if (streaminfo.Contains("1080p"))
-                    {
+                    } else if (streaminfo.Contains("1080p")) {
                         link_1080 = temp_link;
-                    }
-                    else if (streaminfo.Contains("720p"))
-                    {
+                    } else if (streaminfo.Contains("720p")) {
                         link_720 = temp_link;
-                    }
-                    else if (streaminfo.Contains("sd.php"))
-                    {
+                    } else if (streaminfo.Contains("sd.php")) {
                         link_sd = temp_link;
                     }
-                }
-                catch
-                {   
+                } catch {   
                     // Weird thing with their backend, they still link to a fake 720p stream which will 404, but if you take the SD stream they have
                     // available, it is actually at 720p and not some SD resolution.
-                    if (streaminfo.Contains("mp4hd.php"))
-                    {
-                        if (link_sd != "")
-                        {
+                    if (streaminfo.Contains("mp4hd.php")) {
+                        if (link_sd != "") {
                             link_720 = link_sd;
                             link_sd = "";
-                        }
-                        else
-                        {
-                            //var temp_result = await Http.DoGetAsync(temp_link.Replace("mp4hd", "mp4sd"), "https://www.animmex.net/search/", ua, ck, readdata: false);
+                        } else { 
                             link_720 = temp_link.Replace("mp4hd", "mp4sd");
                         }
                     }

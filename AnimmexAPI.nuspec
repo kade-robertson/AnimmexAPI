@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>AnimmexAPI</id>
+    <version>0.1.1.5</version>
+    <title>AnimmexAPI</title>
+    <authors>Kade Robertson</authors>
+    <owners>Kade Robertson</owners>
+    <licenseUrl>https://raw.githubusercontent.com/kade-robertson/AnimmexAPI/master/LICENSE.md</licenseUrl>
+    <projectUrl>github.com/kade-robertson/AnimmexAPI</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>.NET API for the Animmex streaming website.</description>
+    <releaseNotes>Enables cache use for obtaining links.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>animmex animmexapi streaming video api</tags>
+  </metadata>
+</package>
