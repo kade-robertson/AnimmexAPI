@@ -7,7 +7,7 @@
     <authors>Kade Robertson</authors>
     <owners>Kade Robertson</owners>
     <licenseUrl>https://raw.githubusercontent.com/kade-robertson/AnimmexAPI/master/LICENSE.md</licenseUrl>
-    <projectUrl>github.com/kade-robertson/AnimmexAPI</projectUrl>
+    <projectUrl>https://github.com/kade-robertson/AnimmexAPI</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>.NET API for the Animmex streaming website.</description>
     <releaseNotes>Enables cache use for obtaining links.</releaseNotes>
