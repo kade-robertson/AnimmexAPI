@@ -37,12 +37,12 @@ namespace AnimmexAPI
                         HttpResponseMessage responseMessage;
                         if (readdata)
                         {
-                            responseMessage = await client.GetAsync(url);
+                            responseMessage = await client.SendAsync(requestMessage);
                             responseMessage.EnsureSuccessStatusCode();
                             return new HttpResult(await responseMessage.Content.ReadAsStringAsync(), responseMessage.RequestMessage.RequestUri.ToString());
                         }
                         else {
-                            responseMessage = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+                            responseMessage = await client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead);
                             responseMessage.EnsureSuccessStatusCode();
                             return new HttpResult(string.Empty, responseMessage.RequestMessage.RequestUri.ToString());
                         }
@@ -86,12 +86,12 @@ namespace AnimmexAPI
                         HttpResponseMessage responseMessage;
                         if (readdata)
                         {
-                            responseMessage = await client.GetAsync(url);
+                            responseMessage = await client.SendAsync(requestMessage);
                             responseMessage.EnsureSuccessStatusCode();
                             return new HttpResult(await responseMessage.Content.ReadAsStringAsync(), responseMessage.RequestMessage.RequestUri.ToString() + Environment.NewLine + responseMessage.RequestMessage.Headers.ToString());
                         }
                         else {
-                            responseMessage = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+                            responseMessage = await client.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead);
                             responseMessage.EnsureSuccessStatusCode();
                             return new HttpResult(string.Empty, responseMessage.RequestMessage.RequestUri.ToString());
                         }
