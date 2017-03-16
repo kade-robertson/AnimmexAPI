@@ -38,7 +38,21 @@ namespace AnimmexAPI
 
     public class AnimmexClient
     {
+        private string m_primebase = "https://prime.animmex.com";
         private string m_endpoint = "https://amx.4553t5pugtt1qslvsnmpc0tpfz5fo.xyz/KL8jJhGjUN0g3HuGhUHSa5XRZ9MVrjXUuvkbCmFyo1GBMFPhvcFyc7gGKdoBxSV/N3WPL4Y3RIcyKUcBunsEyFZal6Imwlrkgcf6E2ZSZG0M8AvvtcB1.php?id={0}";
+
+        private Dictionary<string, string> m_endpoints = new Dictionary<string, string>() {
+            { "LOGIN", "/login" },
+            { "VIDEOS", "/videos" },
+            { "ALBUMS", "/albums" },
+            { "CATEGORIES", "/categories" },
+            { "COMMUNITY", "/community" },
+            { "USER", "/user/{0}" },
+            { "VIDEO", "/video/{0}" },
+            { "ALBUM", "/album/{0}" },
+            { "CATEGORY", "/category/{0}" }
+        };
+
         /// <summary>
         /// Holds the cookies collected from making requests.
         /// </summary>
@@ -48,6 +62,14 @@ namespace AnimmexAPI
         /// Holds the chosen user-agent for making requests.
         /// </summary>
         private UserAgent m_useragent;
+
+        private string GetEndpoint(string name) {
+            return $"{m_primebase}{m_endpoints[name]}";
+        }
+
+        private string GetEndpoint(string name, params string[] formatting) {
+            return string.Format(GetEndpoint(name), formatting);
+        }
 
         /// <summary>
         /// Creates a new instance of the API.
