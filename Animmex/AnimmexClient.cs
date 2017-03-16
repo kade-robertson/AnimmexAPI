@@ -63,7 +63,7 @@ namespace AnimmexAPI
         }
 
         public async void UpdateEndpoint() {
-            m_endpoint = (await Http.DoGetAsync("https://github.com/kade-robertson/AnimmexAPI/raw/master/animmex-endpoint.txt", "https://github.com/", m_useragent, m_cookies)).Data;
+            m_endpoint = (await Http.DoGetAsync("https://github.com/kade-robertson/AnimmexAPI/raw/master/animmex-endpoint.txt", "https://github.com/", m_useragent, m_cookies).ConfigureAwait(false)).Data;
         }
 
         public async Task<AnimmexVideo> GetDetailsFromVideoID(int id)
@@ -71,7 +71,7 @@ namespace AnimmexAPI
             var result = await Http.DoGetAsync($"https://www.animmex.net/video/{id}/",
                                                 "https://www.animmex.net/",
                                                 m_useragent,
-                                                m_cookies);
+                                                m_cookies).ConfigureAwait(false);
             return VideoParser.VideoPageParse(id, result.Data);
         }
 
@@ -82,7 +82,7 @@ namespace AnimmexAPI
             var result = await Http.DoGetAsync($"https://www.animmex.net/search/videos?search_query=&page={page}",
                                     "https://www.animmex.net/",
                                     m_useragent,
-                                    m_cookies);
+                                    m_cookies).ConfigureAwait(false);
 
             foreach (string videotext in result.Data.Split(new string[] { "<div class=\"col-sm-6 col-md-4 col-lg-4\">" }, StringSplitOptions.None).Skip(1))
             {
@@ -116,7 +116,7 @@ namespace AnimmexAPI
             var result = await Http.DoGetAsync($"https://www.animmex.net/search/videos/{category.ToString()}?search_query={search}&o={sorting.ToString()}&t={upperiod.ToString()}",
                                                 "https://www.animmex.net/",
                                                 m_useragent,
-                                                m_cookies);
+                                                m_cookies).ConfigureAwait(false);
 
             foreach (string videotext in result.Data.Split(new string[] { "<div class=\"col-sm-6 col-md-4 col-lg-4\">" }, StringSplitOptions.None).Skip(1))
             {
@@ -137,7 +137,7 @@ namespace AnimmexAPI
         /// <returns>A list of AnimmexVideo objects that have been viewed recently.</returns>
         public async Task<List<AnimmexVideo>> GetRecentlyViewed(string searchterm = "", bool keepinvalid = false)
         {
-            return await Search(searchterm, sorting: SortBy.BeingWatched, keepinvalid: keepinvalid);
+            return await Search(searchterm, sorting: SortBy.BeingWatched, keepinvalid: keepinvalid).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace AnimmexAPI
         /// <returns>A list of AnimmexVideo objects that have been uploaded recently.</returns>
         public async Task<List<AnimmexVideo>> GetMostRecent(string searchterm = "", bool keepinvalid = false)
         {
-            return await Search(searchterm, sorting: SortBy.MostRecent, keepinvalid: keepinvalid);
+            return await Search(searchterm, sorting: SortBy.MostRecent, keepinvalid: keepinvalid).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace AnimmexAPI
         /// <returns>A list of AnimmexVideo objects that have been viewed the most.</returns>
         public async Task<List<AnimmexVideo>> GetMostViewed(string searchterm = "", bool keepinvalid = false)
         {
-            return await Search(searchterm, sorting: SortBy.MostViewed, keepinvalid: keepinvalid);
+            return await Search(searchterm, sorting: SortBy.MostViewed, keepinvalid: keepinvalid).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace AnimmexAPI
         /// <returns>A list of AnimmexVideo objects that have been most discussed.</returns>
         public async Task<List<AnimmexVideo>> GetMostCommented(string searchterm = "", bool keepinvalid = false)
         {
-            return await Search(searchterm, sorting: SortBy.MostCommented, keepinvalid: keepinvalid);
+            return await Search(searchterm, sorting: SortBy.MostCommented, keepinvalid: keepinvalid).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace AnimmexAPI
         /// <returns>A list of AnimmexVideo objects that have been viewed recently.</returns>
         public async Task<List<AnimmexVideo>> GetTopRated(string searchterm = "", bool keepinvalid = false)
         {
-            return await Search(searchterm, sorting: SortBy.TopRated, keepinvalid: keepinvalid);
+            return await Search(searchterm, sorting: SortBy.TopRated, keepinvalid: keepinvalid).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace AnimmexAPI
         /// <returns>A list of AnimmexVideo objects that have been most favourited.</returns>
         public async Task<List<AnimmexVideo>> GetMostFavourited(string searchterm = "", bool keepinvalid = false)
         {
-            return await Search(searchterm, sorting: SortBy.TopFavourites, keepinvalid: keepinvalid);
+            return await Search(searchterm, sorting: SortBy.TopFavourites, keepinvalid: keepinvalid).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace AnimmexAPI
         /// <returns>A list of AnimmexVideo objects that have the longest duration.</returns>
         public async Task<List<AnimmexVideo>> GetLongest(string searchterm = "", bool keepinvalid = false)
         {
-            return await Search(searchterm, sorting: SortBy.Longest, keepinvalid: keepinvalid);
+            return await Search(searchterm, sorting: SortBy.Longest, keepinvalid: keepinvalid).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace AnimmexAPI
         /// <returns>The first AnnimexVideo object found on the search page.</returns>
         public async Task<AnimmexVideo> ImFeelingLucky(string searchterm = "")
         {
-            var results = await Search(searchterm);
+            var results = await Search(searchterm).ConfigureAwait(false);
             return results[0];
         }
 
@@ -221,7 +221,7 @@ namespace AnimmexAPI
             var video_page = await Http.DoGetAsync(string.Format(m_endpoint, videoid),
                                                     "https://www.animmex.net/search/",
                                                     m_useragent,
-                                                    m_cookies);
+                                                    m_cookies).ConfigureAwait(false);
 
             return VideoParser.StreamParse(video_page, m_useragent, m_cookies);
         }
@@ -233,7 +233,7 @@ namespace AnimmexAPI
         /// <returns>A DirectLinks object with the available streams.</returns>
         public async Task<DirectLinks> GetDirectVideoLinks(AnimmexVideo video)
         {
-            return await GetDirectVideoLinksFromID(video.ID);
+            return await GetDirectVideoLinksFromID(video.ID).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace AnimmexAPI
             var video_page = await Http.DoGetAsync($"https://animmex-cacher.github.io/files/cache/{lg}/{big}/{medium}/{small}.json",
                                                     "https://www.animmex.net/search/",
                                                     m_useragent,
-                                                    m_cookies);
+                                                    m_cookies).ConfigureAwait(false);
             return VideoParser.CacheParse(video_page);
         }
 
@@ -261,7 +261,7 @@ namespace AnimmexAPI
         /// <returns>A DirectLinks object with the cached streams.</returns>
         public async Task<DirectLinks> GetCachedVideoLinks(AnimmexVideo vid)
         {
-            return await GetCachedVideoLinksFromID(vid.ID);
+            return await GetCachedVideoLinksFromID(vid.ID).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -270,7 +270,7 @@ namespace AnimmexAPI
         /// <param name="phpstr">The URL that needs to be resolved (from a DirectLinks object)</param>
         /// <returns>A string directly linking to the requested media.</returns>
         public async Task<string> GetDirectStreamLinkFromServer(string phpstr) {
-            return (await Http.DoGetAsync(phpstr, "https://www.animmex.net/search/", m_useragent, m_cookies, readdata: false)).FinalURL;
+            return (await Http.DoGetAsync(phpstr, "https://www.animmex.net/search/", m_useragent, m_cookies, readdata: false).ConfigureAwait(false)).FinalURL;
         }
 
         /// <summary>
@@ -281,11 +281,11 @@ namespace AnimmexAPI
         /// <returns>A string directly linking to the requested media.</returns>
         public async Task<string> GetDirectStreamLink(DirectLinks d, VideoQuality q = VideoQuality.Best) {
             switch (q) {
-                case VideoQuality.SD: return await GetDirectStreamLinkFromServer(d.StreamSD);
-                case VideoQuality.HD: return await GetDirectStreamLinkFromServer(d.Stream720p);
-                case VideoQuality.FullHD: return await GetDirectStreamLinkFromServer(d.Stream1080p);
-                case VideoQuality.QuadHD: return await GetDirectStreamLinkFromServer(d.Stream1440p);
-                case VideoQuality.UHD: return await GetDirectStreamLinkFromServer(d.Stream2160p);
+                case VideoQuality.SD: return await GetDirectStreamLinkFromServer(d.StreamSD).ConfigureAwait(false);
+                case VideoQuality.HD: return await GetDirectStreamLinkFromServer(d.Stream720p).ConfigureAwait(false);
+                case VideoQuality.FullHD: return await GetDirectStreamLinkFromServer(d.Stream1080p).ConfigureAwait(false);
+                case VideoQuality.QuadHD: return await GetDirectStreamLinkFromServer(d.Stream1440p).ConfigureAwait(false);
+                case VideoQuality.UHD: return await GetDirectStreamLinkFromServer(d.Stream2160p).ConfigureAwait(false);
             }
             return await GetDirectStreamLinkFromServer(d.BestQualityStream);
         }
@@ -298,7 +298,8 @@ namespace AnimmexAPI
         /// <param name="fromcache">A boolean switch to determine if links should come from cache or directly from the server.</param>
         /// <returns>A string directly linking to the requested media.</returns>
         public async Task<string> GetDirectStreamLink(AnimmexVideo v, VideoQuality d = VideoQuality.Best, bool fromcache = true) {
-            return await (fromcache ? GetDirectStreamLink(await GetCachedVideoLinks(v), d) : GetDirectStreamLink(await GetDirectVideoLinks(v), d));
+            return await (fromcache ? GetDirectStreamLink(await GetCachedVideoLinks(v).ConfigureAwait(false), d) 
+                                    : GetDirectStreamLink(await GetDirectVideoLinks(v).ConfigureAwait(false), d)).ConfigureAwait(false);
         }
     }
 }
